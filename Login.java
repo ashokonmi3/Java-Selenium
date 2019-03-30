@@ -1,23 +1,43 @@
-package pom;
+package PageFactory;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Login {
 
+	/**
+	 * 
+	 * All WebElements are identified by @FindBy annotation
+	 * 
+	 */
+
 	WebDriver driver;
 
-	By userName = By.name("uid");
+	@FindBy(name = "uid")
 
-	By password = By.name("password");
+	WebElement user99GuruName;
 
-	By titleText = By.className("barone");
+	@FindBy(name = "password")
 
-	By login = By.name("btnLogin");
+	WebElement password99Guru;
+
+	@FindBy(className = "barone")
+
+	WebElement titleText;
+
+	@FindBy(name = "btnLogin")
+
+	WebElement login;
 
 	public Login(WebDriver driver) {
 
 		this.driver = driver;
+
+		// This initElements method will create all WebElements
+
+		PageFactory.initElements(driver, this);
 
 	}
 
@@ -25,7 +45,7 @@ public class Login {
 
 	public void setUserName(String strUserName) {
 
-		driver.findElement(userName).sendKeys(strUserName);
+		user99GuruName.sendKeys(strUserName);
 
 	}
 
@@ -33,7 +53,7 @@ public class Login {
 
 	public void setPassword(String strPassword) {
 
-		driver.findElement(password).sendKeys(strPassword);
+		password99Guru.sendKeys(strPassword);
 
 	}
 
@@ -41,7 +61,7 @@ public class Login {
 
 	public void clickLogin() {
 
-		driver.findElement(login).click();
+		login.click();
 
 	}
 
@@ -49,7 +69,7 @@ public class Login {
 
 	public String getLoginTitle() {
 
-		return driver.findElement(titleText).getText();
+		return titleText.getText();
 
 	}
 
@@ -65,9 +85,9 @@ public class Login {
 	 * 
 	 */
 
-	public void loginToWeb(String strUserName, String strPasword) {
+	public void loginTo(String strUserName, String strPasword) {
 
-		// Fill user name ("mgr123","mgr123")
+		// Fill user name
 
 		this.setUserName(strUserName);
 

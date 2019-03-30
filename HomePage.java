@@ -1,25 +1,33 @@
-package pom;
+package PageFactory;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
 	WebDriver driver;
-	By homePageUserName = By.xpath("/html/body/table/tbody/tr/td/table/tbody/tr[3]/td");
-	// By homePageUserName = By.xpath("//table//tr[@class='heading3']");
+
+	@FindBy(xpath = "//table//tr[@class='heading3']")
+
+	WebElement homePageUserName;
 
 	public HomePage(WebDriver driver) {
 
 		this.driver = driver;
+
+		// This initElements method will create all WebElements
+
+		PageFactory.initElements(driver, this);
 
 	}
 
 	// Get the User name from Home Page
 
 	public String getHomePageDashboardUserName() {
-		System.out.println("i am in homepage dashboard");
-		return driver.findElement(homePageUserName).getText();
+
+		return homePageUserName.getText();
 
 	}
 
